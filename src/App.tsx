@@ -1,9 +1,15 @@
+import { useState } from 'react';
 import './App.css'
+import { Navigation } from './components/Navigation'
+import AuthModal from './components/login/AuthModal';
 
 function App() {
+  const [showAuth, setShowAuth] = useState(false);
   return (
     <>
-      <main>
+      <main id="top" style={{ position: 'relative' }}>
+        <Navigation showAuth={setShowAuth} />
+        {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
         <section className="video-section">
           <video
           className="hero-video"
@@ -22,15 +28,37 @@ function App() {
             <div className="video-overlay"></div>
 
           <div className="video-content">
-            <h1>Helena & Anders Bröllop 2027</h1>
-            <p>7 maj 2027 · Balingsholms Herrgård</p>
+            <h1 className='petit-formal-script-regular'>Anders & Helenas Bröllop 2027</h1>
+            <p>8 maj 2027 · Balingsholms Herrgård</p>
           </div>
         </section>
-        <section>
-          <h2>Praktisk information</h2>
-          <p>Datum: 7 maj 2027</p>
+        <section className="info-section">
+          <h2 className='agbalumo-regular'>Praktisk information</h2>
+          <p>Datum: 8 maj 2027</p>
           <p>Plats: <a href="https://www.balingsholm.se">Balingsholms Herrgård </a></p>
-          <p>Schema: Ceremoni kl. 15:00, middag kl. 18:00</p>
+        </section>
+        <section id="boende" className='rsvp-section'>
+          
+          <div className='rsvp-container'>
+             <div className='rsvp-info'>
+          <h2 className='agbalumo-regular'>Boende</h2>
+          <p>Vi har reserverat rum på Balingsholms Herrgård för våra gäster. Vänligen boka ditt rum senast 1 april 2027.</p>
+          <a href="https://www.balingsholm.se/hotell/">Boka boende här</a>
+          </div>
+          <img className='rsvp-image' src="https://www.balingsholm.se/wp-content/uploads/2023/09/stockholm-brollop-herrgard-1-scaled.webp" alt="Balingsholms Herrgård" />
+          </div>
+         
+        </section>
+        <section id="info" style={{position:'absolute'}}>
+          <h2 className='agbalumo-regular'>Dagen & Kvällen</h2>
+          <ul>
+            <li>Ceremoni: 15:00</li>
+            <li>Tårta & bubbel: 16:30</li>
+            <li>Middag: 18:00</li>
+            <li>Fest: 20:00</li>
+            <li>Vickning: 23:00</li>
+            <li>Natti natt: 02:00</li>
+          </ul>
         </section>
       </main>
     </>
