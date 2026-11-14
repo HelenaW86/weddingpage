@@ -10,7 +10,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const API = "http://localhost:3000/api/auth";
+  const API = "/api/auth";
 
   // Check existing session on page load
   useEffect(() => {

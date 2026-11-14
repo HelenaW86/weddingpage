@@ -2,34 +2,41 @@
 import express from "express";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
-import cors from "cors";
 import bcrypt from "bcrypt";
 import pg from "pg";
 import dotenv from "dotenv";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+dotenv.config();
 
-declare module "express-session" {
-  interface SessionData {
-    userId: number;
-  }
+const databaseUrl = process.env.DATABASE_URL;
+const sessionSecret = process.env.SESSION_SECRET;
+
+if (!databaseUrl) {
+  throw new Error("DATABASE_URL saknas");
 }
 
-dotenv.config();
+if (!sessionSecret) {
+  throw new Error("SESSION_SECRET saknas");
+}
 
 const app = express();
 const { Pool } = pg;
 
+const isProduction = process.env.NODE_ENV === "production";
+
+if (isProduction) {
+  app.set("trust proxy", 1);
+}
+
 // PostgreSQL connection
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: databaseUrl
 });
+
 
 // Middleware
 app.use(express.json());
-
-app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true
-}));
 
 // PostgreSQL session store
 const PgSession = connectPgSimple(session);
@@ -40,15 +47,16 @@ app.use(
       pool,
       createTableIfMissing: true
     }),
-    secret: process.env.SESSION_SECRET!,
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: isProduction,
       sameSite: "lax",
+      path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000
-    }
+}
   })
 );
 
@@ -214,6 +222,24 @@ app.post("/api/auth/logout", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+// Serve React frontend
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const frontendPath = path.resolve(__dirname, "../dist");
+
+app.use(express.static(frontendPath));
+
+// Unknown API routes
+app.use("/api", (_req, res) => {
+  res.status(404).json({ message: "API endpoint not found" });
+});
+
+// React frontend fallback (Express 5)
+app.get("/{*splat}", (_req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
+
+const PORT = Number(process.env.PORT) || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
