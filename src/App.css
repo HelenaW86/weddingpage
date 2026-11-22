@@ -286,12 +286,13 @@
   top: 1rem;
   left: 1rem;
   text-align: left;
-  padding: 2rem;
+  padding: 2rem 1rem;
   background: #d5d8d5;
   border-radius: 0 0 7px 7px;
-  width: 50%;
+  width: 52%;
   z-index: 1;
   line-height: 2;
+  text-decoration: none;
 }
 .footer {
   padding: 2rem;

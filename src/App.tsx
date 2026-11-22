@@ -87,13 +87,13 @@ function App() {
         </section> */}
                 <section className="schema-section" id="schema">
           <h2 className='agbalumo-regular'>Dagens Schema</h2>
-          <ul>
-            <li>Ceremoni: 14:30</li>
-            <li>Tårta, bubbel, mingel & foto: 15:00</li>
-            <li>Middag: 17:00</li>
-            <li>Fest: 21:00</li>
-            <li>Vickning: 23:00</li>
-            <li>Sista låten: 02:00</li>
+          <ul style={{listStyleType:'none', paddingLeft:0, marginTop:'1rem'}}>
+            <li>14.30 Ceremonin börjar</li>
+            <li>15.00 Tårta & mingel</li>
+            <li>17.00 Middag</li>
+            <li>21.00 Festen drar igång</li>
+            <li>23.00 Vickning</li>
+            <li>02.00 Sista låten</li>
           </ul>
         </section>
         <section id="boende" className='rsvp-section'>
