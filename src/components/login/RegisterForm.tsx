@@ -77,12 +77,10 @@ export default function RegisterForm({
         </button>
       </form>
 
-      <p>
-        Har du redan ett konto?{" "}
-        <button  className="link-button" type="button" onClick={onSwitch}>
-          Logga in
-        </button>
-      </p>
+      <button  className="link-button" type="button" onClick={onSwitch}>
+        Har du redan ett konto? Logga in
+      </button>
+     
     </div>
   );
 }

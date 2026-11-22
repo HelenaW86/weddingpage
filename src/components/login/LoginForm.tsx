@@ -68,12 +68,10 @@ export default function LoginForm({
         </button>
       </form>
 
-      <p>
-        Har du inget konto?{" "}
-        <button className="link-button" type="button" onClick={onSwitch}>
-          Skapa konto
-        </button>
-      </p>
+       <button className="link-button" type="button" onClick={onSwitch}>
+        Har du inget konto, Skapa konto
+      </button>
+      
     </div>
   );
 }

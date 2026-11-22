@@ -204,7 +204,9 @@
 }
 
 .participate-section{
-  background: #b3cbb6;
+  text-align: left;
+  background: #8ea190;
+  /* background: #b3cbb6; */
   padding: 2rem 1rem;
 }
 
@@ -294,7 +296,8 @@
 .footer {
   padding: 2rem;
   text-align: center;
-  background: #b3cbb6;
+  background: #8ea190;
+  /* background: #b3cbb6; */
   text-align: left;
   line-height: 2;
 }
