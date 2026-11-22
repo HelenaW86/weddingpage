@@ -65,7 +65,15 @@ function App() {
             </>
           )}
         </section>
-                <div style={{position:'relative'}}>
+                <div
+          style={{
+            position: 'relative',
+            minHeight: '44rem',
+            backgroundImage: 'url("https://www.balingsholm.se/wp-content/uploads/2023/09/stockholm-brollop-herrgard-1-scaled.webp")',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+          }}
+        >
         {/* <section className="schema-section" id="schema" style={{position:'absolute'}}>
           <h2 className='agbalumo-regular'>Dagens Schema</h2>
           <ul>
@@ -77,8 +85,6 @@ function App() {
             <li>Sista låten: 02:00</li>
           </ul>
         </section> */}
-          <img className='rsvp-image' src="https://www.balingsholm.se/wp-content/uploads/2023/09/stockholm-brollop-herrgard-1-scaled.webp" alt="Balingsholms Herrgård" />
-       
                 <section className="schema-section" id="schema">
           <h2 className='agbalumo-regular'>Dagens Schema</h2>
           <ul>
