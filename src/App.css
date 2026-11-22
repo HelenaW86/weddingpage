@@ -173,7 +173,7 @@
 }
 .info-section{
   padding: 2rem;
-  background: #b3cbb6;
+  background: #a2b8a4;
 }
 .rsvp-section{
   position: absolute;
@@ -205,7 +205,7 @@
 
 .participate-section{
   text-align: left;
-  background: #8ea190;
+  background: #a2b8a4;
   /* background: #b3cbb6; */
   padding: 2rem 1rem;
 }
@@ -296,7 +296,7 @@
 .footer {
   padding: 2rem;
   text-align: center;
-  background: #8ea190;
+  background: #a2b8a4;
   /* background: #b3cbb6; */
   text-align: left;
   line-height: 2;
