@@ -58,18 +58,18 @@ export function AttendingAccordion() {
   };
 
   return (
-    <details onToggle={handleToggle}>
+    <details onToggle={handleToggle} style={{marginTop:'1rem', textAlign:'left'}}>
       <summary>Se vilka som tackat ja</summary>
       {loading ? (
         <p>Hämtar gästlistan...</p>
       ) : error ? (
         <p role="alert">{error}</p>
       ) : users.length > 0 ? (
-        <ul>
+        <ol style={{width:'200px', boxSizing:'border-box', textAlign:'left'}}>
           {users.map((attendee) => (
             <li key={attendee.id}>{attendee.username}</li>
           ))}
-        </ul>
+        </ol>
       ) : loaded ? (
         <p>Inga andra gäster har tackat ja ännu.</p>
       ) : null}

@@ -169,48 +169,49 @@
   z-index: 2;
   text-align: center;
   padding: 2rem;
+  margin-top: 6rem;
 }
 .info-section{
   padding: 2rem;
-  background: #c8dcca;
+  background: #b3cbb6;
 }
 .rsvp-section{
-
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  margin: 1rem;
+}
+.rsvp-section a{
+  font-weight: 600;
+  color: #e3dddd;
 }
 .rsvp-container{
-width: 60%;
-height: 50%;
-z-index: 0;
+
 }
 .rsvp-image{
-  /* position: relative;
-  top: -60px; */
+  display: block;
+  position: relative;
   width: 100%;
   height: auto;
   object-fit: cover;
 }
 .rsvp-info{
-  padding: 1rem;
+  padding: 2rem;
   background: #353121;
   color: #ffff;
-  width: 50%;
-  position: absolute;
   text-align: left;
-  right: 0%;
   z-index: 1;
 }
 
 .participate-section{
-  padding: 2rem;
-  background: #c8dcca;
-  border-radius: 0 0 7px 7px;
+  background: #b3cbb6;
+  padding: 2rem 1rem;
 }
 
 .participate-form{
   padding: 2rem;
   background: #f4f7f2;
-  border-radius: 12px;
-  margin: 0 20px;
+  margin: 1rem 0;
 }
 
 .participate-options {
@@ -277,4 +278,28 @@ z-index: 0;
 
 .participate-error {
   color: #a32121;
+}
+.schema-section{
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  text-align: left;
+  padding: 2rem;
+  background: #d5d8d5;
+  border-radius: 0 0 7px 7px;
+  width: 50%;
+  z-index: 1;
+  line-height: 2;
+}
+.footer {
+  padding: 2rem;
+  text-align: center;
+  background: #b3cbb6;
+  text-align: left;
+  line-height: 2;
+}
+.footer a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #636363;
 }

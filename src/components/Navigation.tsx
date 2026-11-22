@@ -63,7 +63,7 @@ export const Navigation = ({ showAuth }: NavigationProps) => {
           <a href="#top" onClick={closeMenu}>Hem</a>
           <a href="#rsvp" onClick={closeMenu}>OSA</a>
           <a href="#boende" onClick={closeMenu}>Boende</a>
-          <a href="#info" onClick={closeMenu}>Dagen</a>
+          <a href="#schema" onClick={closeMenu}>Schema</a>
           {user && (
             <span className="navigation-greeting">Hej, {user.username}!</span>
           )}
