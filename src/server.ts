@@ -76,7 +76,7 @@ app.post("/api/auth/register", async (req, res) => {
     const result = await pool.query(
       `INSERT INTO users (username, email, password_hash)
        VALUES ($1, $2, $3)
-       RETURNING id, username, email`,
+       RETURNING id, username, email, wedding_attendance`,
       [username, email, passwordHash]
     );
 
@@ -128,7 +128,7 @@ app.post("/api/auth/login", async (req, res) => {
     const { email, password } = req.body;
 
     const result = await pool.query(
-      `SELECT id, username, email, password_hash
+      `SELECT id, username, email, password_hash, wedding_attendance
        FROM users
        WHERE email = $1`,
       [email]
@@ -163,7 +163,8 @@ app.post("/api/auth/login", async (req, res) => {
           user: {
             id: user.id,
             username: user.username,
-            email: user.email
+            email: user.email,
+            wedding_attendance: user.wedding_attendance
           }
         });
       });
@@ -187,7 +188,7 @@ app.get("/api/auth/me", async (req, res) => {
     }
 
     const result = await pool.query(
-      `SELECT id, username, email
+      `SELECT id, username, email, wedding_attendance
        FROM users
        WHERE id = $1`,
       [req.session.userId]
@@ -205,6 +206,60 @@ app.get("/api/auth/me", async (req, res) => {
     res.status(500).json({
       message: "Något gick fel"
     });
+  }
+});
+
+app.get("/api/auth/attending", async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ message: "Du måste vara inloggad" });
+  }
+
+  try {
+    const result = await pool.query(
+      `SELECT id, username
+       FROM users
+       WHERE wedding_attendance = TRUE
+         AND id <> $1
+       ORDER BY username`,
+      [req.session.userId]
+    );
+
+    res.json({ users: result.rows });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Kunde inte hämta gästlistan" });
+  }
+});
+
+app.patch("/api/auth/wedding-attendance", async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ message: "Du måste vara inloggad" });
+  }
+
+  const attendance = req.body?.wedding_attendance;
+  if (attendance !== null && typeof attendance !== "boolean") {
+    return res.status(400).json({
+      message: "Svaret måste vara true, false eller null"
+    });
+  }
+
+  try {
+    const result = await pool.query(
+      `UPDATE users
+       SET wedding_attendance = $1
+       WHERE id = $2
+       RETURNING id, username, email, wedding_attendance`,
+      [attendance, req.session.userId]
+    );
+
+    if (!result.rows[0]) {
+      return res.status(404).json({ message: "Användaren hittades inte" });
+    }
+
+    res.json({ user: result.rows[0] });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Kunde inte spara svaret" });
   }
 });
 
